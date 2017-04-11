@@ -1,0 +1,238 @@
+<div class="container">
+	<ul class="breadcrumb">
+		<li><a href=""><i class="fa fa-home"></i></a></li>
+		<li class="last"><a href="" style="display: none;"></a>
+		<span><%= @product.name %></span></li>
+	</ul>
+	<div class="row">
+		<div id="content" class="col-sm-12 product_page">
+			<div class="row product-content-columns">
+				<div class="col-sm-5 col-lg-7 product_page-left">				
+					<div id="default_gallery" class="product-gallery">
+						<div class="image-thumb">
+							<div class="bx-wrapper" style="max-width: 99px; margin: 0px auto;">
+								<div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 537px;">
+									<ul id="image-additional" class="image-additional" style="width: auto; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+										<li style="float: none; list-style: outside none none; position: relative; width: 97px; margin-bottom: 13px;">
+											<a href="#" data-image="<%= @product.image %>" class="active">
+												<img src="<%= @product.image %>" alt="">
+											</a>
+										</li>
+									</ul>
+									<ul id="image-additional" class="image-additional" style="width: auto; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+										<li style="float: none; list-style: outside none none; position: relative; width: 97px; margin-bottom: 13px;">
+											<a href="#" data-image="<%= @product.image %>" class="active">
+												<img src="<%= @product.image %>" alt="">
+											</a>
+										</li>
+									</ul>
+								</div>		
+							</div>	
+						</div>
+						<div id="product-image" class="product-image">
+							<div class="magnificent-wrap">
+								<div class="magnificent magnificent-mode-inner" data-magnificent="product-image">
+									<div class="polaroid">
+										<div class="inner" style="position: relative;">
+											<img src="<%= @images[0].link %>">
+											<div class="magnificent-area" style="position: absolute; z-index: 100; top: 0px; left: 0px; background: white none repeat scroll 0% 0%; opacity: 0; height: 528px; width: 528px;">											
+											</div>
+											<div data-magnificent-viewport="product-image" class="magnificent-viewport magnificent-viewport-mode-inner" style="display: none; position: absolute; z-index: 98; overflow: hidden; height: 528px; width: 528px; left: 0px; top: 0px;">
+											<div class="inner" style="position: relative; width: 1584px; top: -96.6766px; left: -473.613px;">
+												<img src="<%= @product.image %>">
+											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="magnificent-viewport-wrap">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-7 col-lg-5 product_page-right">
+					<div class="general_info product-info">
+						<h2 class="product-title"><%= @product.name %></h2>						 
+						<div class="rating-section product-rating-status">
+							<div class="rating">
+
+								<i class="fa fa-star-o"></i>
+								<i class="fa fa-star-o"></i>
+								<i class="fa fa-star-o"></i>
+								<i class="fa fa-star-o"></i>
+								<i class="fa fa-star-o"></i>
+								&nbsp;
+								&nbsp;
+								<a onclick="document.getElementById('tab-review').scrollIntoView();">0 reviews</a> / <a onclick="document.getElementById('tab-review').scrollIntoView();">Write a review</a>
+							</div>
+						</div>
+						<div class="price-section">
+							<span class="price-new">$<%= @product.price %>0</span> 
+							<% if !(@product.status == false ) %>
+							 	<span class="price-old">$40.00</span>
+							<% end %> 	
+							<div class="reward-block">
+							</div>
+						</div>				
+					</div>
+
+					<%= form_for(:session, url: cart_add_product_to_cart_path, method: :post, class: "form-group") do |f| %>
+					 	<h3>Available Options</h3>
+					 	<div class="form-group">
+						  	<%= f.label :Size,class: "control-label col-sm-6",stype: "padding-top: 7px; margin-bottom: 0;float: right;" %>
+						 	<%= f.select :type_product, options_for_select(Product::TYPES.map{|e| [e, e]}), class: "form-control"  %>
+					 	</div>
+		              	<div class="form-group">
+			                <%= f.label :quantity,class: "control-label col-sm-6" %>
+			                <%= f.number_field :quantity,:value => 1, class: "form-control ",type: "text" %>                
+		              	</div>             
+		               	<%= f.hidden_field :product_id, :value => @product.id%>
+		              	<%= f.submit "Add to cart", class: "btn btn-primary" %>      
+		            <% end %>			
+		            <script type="text/javascript">
+		            	<script>
+							$(document).ready(function(){				    
+							    $("#review-btn").click(function(){
+							    	if (!$("#review-area").val()) {
+								   		$("#error-empty-content").fadeIn();
+									}
+									else{
+										$("#error-empty-content").fadeOut();
+
+									}
+								});
+							});	
+						</script>
+		            </script>
+				</div>
+			</div>
+			<div class="product_tabs">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a id="1"  data-toggle="tab" aria-expanded="true">Description</a>
+					</li>					
+					<li>
+						<a id="3" data-toggle="tab">Reviews (0)</a>
+					</li>
+					<li>
+						<a id="4" data-toggle="tab">
+						Video </a>
+					</li>
+				</ul>
+				<div class="tab-content">										
+					<div id="tab-description" class="tab-block product-desc product-section active">
+						<p><%= @product.description%></p> 
+						<div class="clearfix"></div>
+					</div>
+					
+					<div id="tab-review" class="tab-pane product-reviews product-section ">
+						<form class="form-horizontal" id="form-review">
+							<div id="review"> 
+								<div class="review-item">
+									<div class="row">
+										<div class="col-sm-3">
+											
+											<div class="review-author"><strong>Albert</strong></div>
+											<div class="review-date">03/12/2014</div>
+										</div>
+										<div class="col-sm-9">
+											I wanted to say thank you for the amazing product and for the fast processing and delivery. It was impressive, you weren't kidding. I was surprised with such an excellent quality...My family is very happy. I would definitely use this site again and again and recommend it to others. 
+										</div>
+									</div>
+								</div>
+								<div class="text-right"></div>
+							</div>
+					 
+							<div class="review-form-title">
+								<h3 class="product-section_title close-tab" id="reviews_form_title">Write a review</h3>
+							</div>
+							<div class="product-review-form" id="reviews_form" style="display: block;">
+								<div class="form-group required">
+									<div class="col-sm-12">
+										<label class="control-label" for="input-name">Your Name</label>
+										<input name="name" value="" id="input-name" class="form-control" type="text">
+									</div>
+								</div>
+								<div class="form-group required">
+									<div class="col-sm-12">
+										<label class="control-label" for="input-review">Your Review</label>
+										<textarea name="text" rows="5" id="input-review"></textarea>
+										<div class="help-block"><span class="text-danger">Note:</span> HTML is not translated!</div>
+									</div>
+								</div>
+								<div class="form-group required">
+									<div class="col-sm-12">
+										<label class="control-label">Rating</label>
+										&nbsp;&nbsp;&nbsp; Bad&nbsp;
+										<input name="rating" value="1" type="radio">
+										&nbsp;
+										<input name="rating" value="2" type="radio">
+										&nbsp;
+										<input name="rating" value="3" type="radio">
+										&nbsp;
+										<input name="rating" value="4" type="radio">
+										&nbsp;
+										<input name="rating" value="5" type="radio">
+										&nbsp;Good
+									</div>
+								</div>
+								<div class="buttons clearfix">
+									<div class="pull-right">
+										<button type="button" id="button-review" data-loading-text="Loading..." class="btn btn-primary">Continue</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div id="tab-video" class="tab-pane product-video product-section ">
+						<div class="r_frame">
+							<iframe src="//www.youtube.com/embed/n_jxuwfA6h8? Rel=0&amp;controls=0&amp;showinfo=0&amp;wmode=transparent" allowfullscreen="" width="560" height="315"></iframe> 
+							</div>
+						<div class="clearfix"></div>
+					</div>
+					
+				</div>
+				<script>
+					$(document).ready(function(){
+					    $("#1").click(function(){
+					        $("#tab-description").show();
+					         $("#tab-specification").hide();
+					         $("#tab-review").hide();
+					          $("#tab-video").hide();
+					    });
+					    $("#2").click(function(){
+					        $("#tab-description").hide();
+					         $("#tab-specification").show();
+					         $("#tab-review").hide();
+					          $("#tab-video").hide();
+					    });
+					    $("#3").click(function(){
+					        $("#tab-description").hide();
+					         $("#tab-specification").hide();
+					         $("#tab-review").show();
+					          $("#tab-video").hide();
+					    });
+					    $("#4").click(function(){
+					        $("#tab-description").hide();
+					         $("#tab-specification").hide();
+					         $("#tab-review").hide();
+					          $("#tab-video").show();
+					    });
+					});
+				</script>
+				
+			</div>
+			<div class="box specials">
+					<div class="box-heading">
+						<h3>
+							Related Products
+						</h3>
+					</div>
+					<div class="box-content">
+						
+					</div>
+				</div>
+		</div>	
+	</div>
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+	<h4>New Feeds</h4>
+	<div class="row"> 
+		<div id="content" class="col-sm-8"> 
+			<%= form_for(:session, url: user_add_review_path,class: 'form-group') do |f| %>
+			  	<%= f.text_area :review,id: "review-area", class: 'form-control', placeholder: "What do you think?", rows: "5" %>
+			  	<p id="error-empty-content" style="display: none">Your review is empty! Please enter content...</p>
+	            <%= f.submit "Post",id: "review-btn", class: "btn pull-right", style: "margin-top: 15px; width: 80px" %>      
+	        <% end %>
+			<br><br><br>
+			<script>
+				$(document).ready(function(){				    
+				    $("#review-btn").click(function(){
+				    	if (!$("#review-area").val()) {
+					   		$("#error-empty-content").fadeIn();
+						}
+						else{
+							$("#error-empty-content").fadeOut();
+
+						}
+					});
+				});	
+			</script>
+		  	<% @reviews.each do |review|%>
+		  		<div class="">
+					<hr>
+					<div>
+						<h4><%= current_user.name %></h4>		
+						<div class="dropdown pull-right">
+					    <button class=" dropdown-toggle" type="button" data-toggle="dropdown">
+					    <span class="caret"></span></button>
+					    <ul class="dropdown-menu">
+					      <li><a href="#">Normal</a></li>
+					      <li class="disabled"><a href="#">Disabled</a></li>
+					      <li class="active"><a href="#">Active</a></li>
+					      <li><a href="#">Normal</a></li>
+					    </ul>
+					  </div>
+					</div>
+					      
+					<p><span class="glyphicon glyphicon-time"></span>  <%= review.created_at %></p>
+					<p><%= review.content %></p>
+
+					<form id="div_<%= review.id %>" role="form" style="display: none">
+						<div  class="form-group" >
+						  <textarea class="form-control" rows="1" required="" ></textarea>
+						</div>
+						<button id="submit_<%= review.id %>" type="" class="btn btn-success pull-right" >Comment</button>
+					</form>
+
+					<button id="show_<%= review.id %>"  class="btn btn-success pull-right" >Comment</button>
+					<script>
+						$(document).ready(function(){
+						    $("#show_<%= review.id %>").click(function(){
+						        $("#div_<%= review.id %>").fadeIn();
+						        $("#comment-post_<%=review.id%>").fadeIn();
+						        $("#show_<%=review.id%>").hide();
+						    });
+						    $("#review-btn").click(function(){
+						    	if (!$("#review-area").val()) {
+							   		$("#error-empty-content").fadeIn();
+								}
+								else{
+									$("#error-empty-content").fadeOut();
+								}
+							});
+						});	
+					</script>
+					<p><span class="badge">1</span> Comments:</p>
+
+					<div id="comment-post_<%=review.id%>" class="row" style="display: none">
+						<div class="row">
+							<p class="col-sm-1"> &nbsp</p>  
+						    <div class="col-sm-7">
+						      <p><strong>Quyền </strong> <small>Sep 29, 2015, 9:12 PM</small></p>
+						      <p>chủ yếu là tấm lòng thôi ,người ta cũng chả chê gì mình đâu nhưng cũng phải làm cho tươm tất</p>		      		     
+						    </div>
+						</div>
+					</div>
+				</div>
+		  	<% end %>	   
+		</div>		
+			
+		<%= render 'users/right_sidenav'%> 
+	</div>
+</div>
