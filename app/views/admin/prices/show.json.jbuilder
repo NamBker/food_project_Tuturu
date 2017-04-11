@@ -1,1 +1,0 @@
-json.partial! "admin_prices/admin_price", admin_price: @admin_price

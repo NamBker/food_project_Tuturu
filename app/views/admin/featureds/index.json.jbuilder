@@ -1,1 +1,0 @@
-json.array! @admin_featureds, partial: 'admin_featureds/admin_featured', as: :admin_featured
