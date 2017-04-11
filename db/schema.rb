@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123061440) do
-
-  create_table "bills", force: :cascade do |t|
-    t.float    "input_price"
-    t.float    "selling_price"
-    t.integer  "product_details_id"
-    t.integer  "quantity"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
+ActiveRecord::Schema.define(version: 20161122131351) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -36,59 +27,11 @@ ActiveRecord::Schema.define(version: 20161123061440) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "featureds", force: :cascade do |t|
-    t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "images", force: :cascade do |t|
     t.text     "link"
     t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "order_details", force: :cascade do |t|
-    t.integer  "order_id"
-    t.integer  "product_detail_id"
-    t.string   "product_name"
-    t.string   "product_type"
-    t.integer  "product_details_code"
-    t.integer  "quantity"
-    t.float    "price"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "name"
-    t.text     "email"
-    t.text     "address"
-    t.text     "requirement"
-    t.integer  "phonenumber"
-    t.boolean  "status",      default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-  end
-
-  create_table "product_codes", force: :cascade do |t|
-    t.integer  "store_id"
-    t.boolean  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "product_details", force: :cascade do |t|
-    t.string   "type_product"
-    t.integer  "product_id"
-    t.string   "code"
-    t.float    "price"
-    t.boolean  "new"
-    t.float    "discount"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -108,19 +51,6 @@ ActiveRecord::Schema.define(version: 20161123061440) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "specials", force: :cascade do |t|
-    t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "stores", force: :cascade do |t|
-    t.string   "product_detail_id"
-    t.integer  "quantity"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
   end
 
   create_table "users", force: :cascade do |t|
