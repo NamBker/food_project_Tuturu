@@ -1,0 +1,31 @@
+body .home .top-banner-with-bg.top-banner .search-form input[type="text"] {
+	width: 585px;
+	height: 22px;	
+}
+#home a.btn2 {
+	clear: both;
+}
+#header .todos-btn {
+	height: 30px;
+}
+#header .search-form input[type="text"] {
+	height: 19px;
+}
+.gallery .mask a img {
+	margin-left: -313px;
+}
+.external #sidebar .download .btn-download {
+	width: 270px;
+}
+#sidebar .btn-report-copy {
+	width: 160px;
+}
+#sidebar .download-problems {
+	width: 160px;
+}
+.related-files-content {
+	height: 100%;
+}
+.related-sponsor {
+	height: 100%;
+}
